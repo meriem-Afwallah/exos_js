@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <meta charset="UTF-8">
+       <title>Exercice: exoXX</title>
+       <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+       <link href="css/style.css" rel="stylesheet" type="text/css"/>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <script src="js/lib/jquery-3.3.1.min.js"  type="text/javascript"></script>
+       <script src="js/lib/bootstrap.min.js" type="text/javascript"></script>
+       <script>
+           var previous = "";
+           $(document).ready(function () {
+               $('#menu').load('menu.html');
+               $('#cp').keypress(function(e) {
+                  var ascii = e.charCode;
+                  // console.log(ascii); 48 à 57 pour les chiffres (ascii différent de 0 pour firefox)
+               if ((ascii <48 || ascii >57) && ascii !== 0) {
+                   e.preventDefault();
+               }
+               }).keyup(function(e){
+                   if(this.value !== previous && this.value.length > 1){
+                       //console.log(this.value);
+                       $.ajax({
+                         url:'getVilles.php',
+                         type: 'post',
+                         data: 'cp=' + this.value,
+                         dataType: 'json'
+                       }).done(function(data) {
+                           //console.log(data);
+                          var st = '<option value="#01">#02</option>';
+                          $('#villes').empty();
+                          for(var i=0; i<data.length; i++) {
+                               var row = data[i];
+                               var option = st.replace('#01', row[0]).replace('#02', row[1]);
+                               $('#villes').append(option);
+                           }
+                       }).fail(function(xhr){
+                           alert(xhr.responseText);
+                       }).always(function() {
+                       });
+                   }
+                   previous = this.value;
+               });
+           });
+       </script>
+   </head>
+   <body>
+       <div id="page">
+           <div id="menu"></div>
+           <div id="adresse">
+               <label for="cp">Code postal</label>
+               <input type="text" id="cp" maxlength="5"/>
+               <select id="villes"></select>
+           </div>
+       </div>
+   </body>
+</html>
