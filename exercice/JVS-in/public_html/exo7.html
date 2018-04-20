@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <title>Exercice: exo7</title>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="css/syle.css" rel="stylesheet" type="text/css"/>
+       <script src="js/lib/jquery-3.3.1.min.js" type="text/javascript"></script>
+       <script>
+           $(document).ready(function () {
+               
+               $('#btn').bind ('click', function() {
+                   $('<a href="http://www.google.fr">Google</a>').appendTo('#result');
+               });
+                $('#btn2').bind ('click', function(){
+                    
+                    $('#result a').each(function() {
+                        var content = this.innerHTML;
+                        $('#result').append(content);
+                        this.remove();                      
+                    }); 
+            });
+        });
+       </script>
+   </head>
+   <body>
+       <div id="page">
+           <button id="btn">Ajouter un lien</button>
+           <button id="btn2">Effacer les liens</button>
+           <div id="result"></div>
+           <progress value="0.5" style="border:1px solid black;"></progress>
+       </div>
+   </body>
+</html>

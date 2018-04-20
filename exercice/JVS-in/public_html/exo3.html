@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+       <title>JVS-INI: Exercice 02</title>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link href="css/syle.css" rel="stylesheet" type="text/css"/>
+       <script>
+           function Employe(nom, fonction, salaire) {
+               this.nom = nom;
+               this.fonction = fonction;
+               this.salaire = salaire;
+               
+           }
+           Employe.prototype.afficher = function() {
+               return this.nom + " " + this.fonction + " " + this.salaire;
+           }
+           var pierre = new Employe('Pierre', 'Developpeur', 3000);
+         
+           console.log(pierre);
+           
+           Date.prototype.frenchDate = function() {
+               var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: "2-digit", minute: "2-digit", second: "2-digit" };
+               
+               return this.toLocaleString('fr', options);
+           }
+           
+           
+           console.log((new Date()).frenchDate());
+           
+           var produit = {
+               nom: "Chateau la pompe",
+               categorie: "boisson",
+               prix: 12.0,
+               afficher: function() {
+                   console.log(this.nom); }
+               }
+          produit.afficher();
+           
+       </script>
+   </head>
+   <body>
+       <div>TODO write contents</div>
+   </body>
+</html>
